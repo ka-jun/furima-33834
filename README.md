@@ -27,7 +27,7 @@ has_many :purchases
 | status_id          | integer    | null: false       | 
 | shipping_charge_id | integer    | null: false       | 
 | shipping_area_id   | integer    | null: false       | 
-| shipping_days_id   | integer    | null: false       | 
+| shipping_day_id    | integer    | null: false       | 
 | price              | integer    | null: false       | 
 | user               | references | foreign_key: true | 
 
@@ -45,17 +45,17 @@ has_many :comments
 
 ### Association
 belongs_to :item
-has_one :shipping
+has_one :address
 belongs_to :user
 
 
-### shippings（配送先情報)
+### addresss（配送先情報)
 | Column           | Type       | Option            | 
 | ---------------- | ---------- | ----------------- | 
-| postal-code      | string     | null: false       | 
+| postal_code      | string     | null: false       | 
 | shipping_area_id | integer    | null: false       | 
 | city             | string     | null: false       | 
-| home-number      | string     | null: false       | 
+| home_number      | string     | null: false       | 
 | building         | string     |                   | 
 | tel              | string     | null: false       | 
 | item             | references | foreign_key: true | 
