@@ -1,16 +1,16 @@
 # README
 
 ### users
-| Column             | Type   | Options           | 
-| ------------------ | ------ | ----------------- | 
-| nickname           | string | null: false       | 
-| email              | string | foreign_key: true | 
-| encrypted_password | string | null: false       | 
-| birthday           | date   | null: false       | 
-| last-name          | string | null: false       | 
-| first-name         | string | null: false       | 
-| last-name-kana     | string | null: false       | 
-| first-name-kana    | string | null: false       | 
+| Column             | Type   | Options     | 
+| ------------------ | ------ | ----------- | 
+| nickname           | string | null: false | 
+| email              | string | unique:true | 
+| encrypted_password | string | null: false | 
+| birthday           | date   | null: false | 
+| last_name          | string | null: false | 
+| first_name         | string | null: false | 
+| last_name_kana     | string | null: false | 
+| first_name_kana    | string | null: false | 
 
 ### Association
 has_many :items
@@ -19,15 +19,15 @@ has_many :purchases
 
 
 ### items
-| Column             | Type       | Opution           | 
+| Column             | Type       | Oputions          | 
 | ------------------ | ---------- | ----------------- | 
 | name               | string     | null: false       | 
 | text               | text       | null: false       | 
 | category_id        | integer    | null: false       | 
 | status_id          | integer    | null: false       | 
-| shipping-charge_id | integer    | null: false       | 
-| shipping-area_id   | integer    | null: false       | 
-| shipping-days_id   | integer    | null: false       | 
+| shipping_charge_id | integer    | null: false       | 
+| shipping_area_id   | integer    | null: false       | 
+| shipping_days_id   | integer    | null: false       | 
 | price              | integer    | null: false       | 
 | user               | references | foreign_key: true | 
 
@@ -41,7 +41,7 @@ has_many :comments
 | Column   | Type       | Options           | 
 | -------- | ---------- | ----------------- | 
 | item     | references | foreign_key: true | 
-| user     | reference  | foreign_key: true | 
+| user     | references | foreign_key: true | 
 
 ### Association
 belongs_to :item
@@ -50,12 +50,12 @@ belongs_to :user
 
 
 ### shippings（配送先情報)
-| Column        | Type       | Option            | 
+| Column        | Type       | Options           | 
 | ------------- | ---------- | ----------------- | 
-| postal-code   | string     | null: false       | 
+| postal_code   | string     | null: false       | 
 | prefecturs_id | integer    | null: false       | 
 | city          | string     | null: false       | 
-| home-number   | string     | null: false       | 
+| home_number   | string     | null: false       | 
 | bilding       | string     |                   | 
 | tel           | string     | null: false       | 
 | purchase      | references | foreign_key: true | 
@@ -64,7 +64,7 @@ belongs_to :user
 belongs_to :purchase
 
 ### comments
-| Column  | Type       | Option | 
+| Column  | Type       | Options| 
 | ------- | ---------- | ------ | 
 | comment | string     |        | 
 | item    | reference  |        | 
