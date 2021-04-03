@@ -50,25 +50,26 @@ belongs_to :user
 
 
 ### shippings（配送先情報)
-| Column        | Type       | Options           | 
-| ------------- | ---------- | ----------------- | 
-| postal_code   | string     | null: false       | 
-| prefecturs_id | integer    | null: false       | 
-| city          | string     | null: false       | 
-| home_number   | string     | null: false       | 
-| bilding       | string     |                   | 
-| tel           | string     | null: false       | 
-| purchase      | references | foreign_key: true | 
+| Column           | Type       | Option            | 
+| ---------------- | ---------- | ----------------- | 
+| postal-code      | string     | null: false       | 
+| shipping_area_id | integer    | null: false       | 
+| city             | string     | null: false       | 
+| home-number      | string     | null: false       | 
+| building         | string     |                   | 
+| tel              | string     | null: false       | 
+| item             | references | foreign_key: true | 
+| purchase         | references | foreign_key: true | 
 
 ### Association
 belongs_to :purchase
 
 ### comments
-| Column  | Type       | Options| 
-| ------- | ---------- | ------ | 
-| comment | string     |        | 
-| item    | reference  |        | 
-| user    | references |        | 
+| Column  | Type       | Option            | 
+| ------- | ---------- | ----------------- | 
+| comment | string     |                   | 
+| item    | references | foreign_key: true | 
+| user    | references | foreign_key: true | 
 
 ### Association
 belongs_to :user
