@@ -5,11 +5,8 @@
 | --------------------- | ------ | ----------- | 
 | nickname              | string | null: false | 
 | email                 | string | null: false | 
-| password              | string | null: false | 
-| password-confirmation | string | null: false | 
-| birth-year            | string | null: false | 
-| birth-month           | string | null: false | 
-| birth-day             | string | null: false | 
+| encrypted_password    | string | null: false | 
+| birthday              | date   | null: false | 
 | last-name             | string | null: false | 
 | first-name            | string | null: false | 
 | last-name-kana        | string | null: false | 
@@ -21,18 +18,17 @@ has_many ;comments
 
 
 ### items
-| Column          | Type          | Opution     | 
-| --------------- | ------------- | ----------- | 
-| item-image      | ActiveStorage | null: false | 
-| item-name       | string        | null: false | 
-| item-text       | text          | null: false | 
-| item-category   | string        | null: false | 
-| item-status     | string        | null: false | 
-| shipping-charge | string        | null: false | 
-| shipping-area   | string        | null: false | 
-| shipping-days   | string        | null: false | 
-| item-price      | string        | null: false | 
-| user            | reference     |             | 
+| Column             | Type      | Opution     | 
+| ------------------ | --------- | ----------- | 
+| item-name          | string    | null: false | 
+| item-text          | text      | null: false | 
+| item-category_id   | string    | null: false | 
+| item-status_id     | string    | null: false | 
+| shipping-charge_id | string    | null: false | 
+| shipping-area_id   | string    | null: false | 
+| shipping-days_id   | string    | null: false | 
+| item-price         | integer   | null: false | 
+| user               | reference |             | 
 
 ### Association
 belongs_to :user
@@ -42,29 +38,30 @@ has_many :comments
 
 
 ### purchase(購入情報) 
-| Column         | Type      | Option      | 
-| -------------- | --------- | ----------- | 
-| card-number    | string    | null: false | 
-| card-exp-year  | string    | null: false | 
-| card-exp-month | string    | null: false | 
-| security-code  | string    | null: false | 
-| item           | reference |             | 
+| Column  | Type       | Options           | 
+| ------- | ---------- | ----------------- | 
+| item    | references | foreign_key: true | 
+| user    | reference  |                   | 
+
 ### Association
 belong_to :item
+belongs_to :shipping
 
 
 ### shipping（配送先情報)
-| Column      | Type      | Option      | 
-| ----------- | --------- | ----------- | 
-| postal-code | string    | null: false | 
-| prefecturs  | string    | null: false | 
-| city        | string    | null: false | 
-| bilding     | string    |             | 
-| tel         | string    | null: false | 
-| item        | reference |             | 
+| Column        | Type      | Option      | 
+| ------------- | --------- | ----------- | 
+| postal-code   | string    | null: false | 
+| prefecturs_id | integer   | null: false | 
+| city          | string    | null: false | 
+| bilding       | string    |             | 
+| tel           | string    | null: false | 
+| item          | reference |             | 
+| purchase      | reference |             | 
 
 ### Association
 belong_to :item
+belongs_to :purchase
 
 ### comments
 | Column  | Type       | Option | 
