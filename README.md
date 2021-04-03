@@ -14,8 +14,8 @@
 
 ### Association
 has_many :items
-has_many ;comments
-belongs_to :purchase
+has_many :comments
+has_many :purchases
 
 
 ### items
@@ -34,7 +34,6 @@ belongs_to :purchase
 ### Association
 belongs_to :user
 has_one :purchase
-has_one :shipping
 has_many :comments
 
 
@@ -43,11 +42,10 @@ has_many :comments
 | -------- | ---------- | ----------------- | 
 | item     | references | foreign_key: true | 
 | user     | reference  | foreign_key: true | 
-| shipping | reference  | foreign_key: true | 
 
 ### Association
 belongs_to :item
-belongs_to :shipping
+has_one :shipping
 belongs_to :user
 
 
@@ -60,11 +58,9 @@ belongs_to :user
 | home-number   | string     | null: false       | 
 | bilding       | string     |                   | 
 | tel           | string     | null: false       | 
-| item          | references | foreign_key: true | 
 | purchase      | references | foreign_key: true | 
 
 ### Association
-belongs_to :item
 belongs_to :purchase
 
 ### comments
