@@ -5,8 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :nickname, presence: true
-  validates :email, unique: true, inclusion: {in: ['@']}
-  validates :encrypted_password, presence: true, {length : {minimum:6} }, format: {with: /\A[a-zA-Z0-9]+\z/, message: "半角英数字を使用してください"}
+  validates :encrypted_password, format: {with: /\A[a-zA-Z0-9]+\z/, message: "半角英数字を使用してください"}
   validates :last_name, presence: true
   validates :first_name, presence: true
   validates :last_name_kana, presence: true
