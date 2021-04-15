@@ -34,38 +34,36 @@ RSpec.describe User, type: :model do
       @user.password = ''
       @user.valid?
       expect(@user.errors.full_messages).to include("Password can't be blank", 'Password is invalid',
-                                                   "Password confirmation doesn't match Password")
+                                                    "Password confirmation doesn't match Password")
     end
     it 'パスワードは、6文字以上での入力が必須であること（6文字が入力されていれば、登録が可能なこと）' do
-      
       @user.password = 'te12'
-      @user.password_confirmation = 'te12'
-      @user.password = 'ｔｅ12'
-      @user.password_confirmation = 'ｔｅ12'
       @user.valid?
       expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
     end
-    it 'パスワードは、半角英数字混合での入力が必須であること（半角英数字が混合されていれば、登録が可能なこと）' do
-      
-      @user.password = '000000'
+    it 'パスワードは、半角英数字混合での入力が必須であること（passwordが英語のみでは登録できないこと）' do
       @user.password = 'aaaaaa'
-      @user.password = '００００００'
-      @user.password = 'ａａａａａａ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Password is invalid')
+    end
+    it 'パスワードは、半角英数字混合での入力が必須であること（passwordが数字のみでは登録できないこと）' do
+      @user.password = '000000'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Password is invalid')
+    end
+    it 'パスワードは、半角英数字混合での入力が必須であること（passwordが全角では登録できないこと）' do
       @user.password ='ｔｅｓｔ１２３'
       @user.valid?
       expect(@user.errors.full_messages).to include('Password is invalid')
     end
     it 'パスワードは、確認用を含めて2回入力すること' do
       @user.password = 'test123'
-      @user.password = 'ｔｅｓｔ１２３'
       @user.password_confirmation = ''
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
     it 'パスワードとパスワード（確認用）は、値の一致が必須であること' do
-      @user.password = ''
       @user.password = 'testtest222'
-      @user.password = 'ｔｅｓｔ５５５'
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
