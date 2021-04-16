@@ -19,7 +19,7 @@ has_many :purchases
 
 
 ### items
-| Column             | Type       | Oputions          | 
+| Column             | Type       | Options           | 
 | ------------------ | ---------- | ----------------- | 
 | name               | string     | null: false       | 
 | text               | text       | null: false       | 
@@ -49,7 +49,7 @@ has_one :address
 belongs_to :user
 
 
-### addresss（配送先情報)
+### addresses（配送先情報)
 | Column           | Type       | Option            | 
 | ---------------- | ---------- | ----------------- | 
 | postal_code      | string     | null: false       | 
