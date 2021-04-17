@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+  has_one_attached :image
 
   with_options presence: true do
     validates :name
@@ -9,8 +10,6 @@ class Item < ApplicationRecord
     validates :shipping_area_id
     validates :shipping_day_id
     validates :price
+    validates :user
   end
-
-    validates :user, foreign_key: true
-
 end
