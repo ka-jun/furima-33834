@@ -1,10 +1,10 @@
 class ItemDetailController < ApplicationController
   def index
-    @item_details  = Item_detail.order("created_at DESC")
+    @item_details = Item_detail.order('created_at DESC')
   end
 
   def new
-    @item_detail  = Item_detail.new
+    @item_detail = Item_detail.new
   end
 
   def create

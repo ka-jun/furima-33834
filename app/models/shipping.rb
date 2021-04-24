@@ -6,7 +6,7 @@ class Shipping < ApplicationRecord
 
   validates :title, :text, presence: true
 
-  validates :charge_id, numericality: { other_than: 1 } 
-  validates :area_id, numericality: { other_than: 1 } 
-  validates :day_id, numericality: { other_than: 1 } 
+  validates :charge_id, numericality: { other_than: 1 }
+  validates :area_id, numericality: { other_than: 1 }
+  validates :day_id, numericality: { other_than: 1 }
 end

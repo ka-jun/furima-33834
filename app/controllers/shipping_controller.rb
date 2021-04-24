@@ -1,10 +1,10 @@
 class ShippingController < ApplicationController
   def index
-    @shippings  = Sipping.order("created_at DESC")
+    @shippings = Sipping.order('created_at DESC')
   end
 
   def new
-    @shipping  = Sipping.new
+    @shipping = Sipping.new
   end
 
   def create
