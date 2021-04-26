@@ -123,6 +123,11 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Price The number is invalid.')
       end
+      it '販売価格に数字と半角英数の混合だと登録不可' do
+        @item.price = 'aaa111'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price The number is invalid.")
+      end
       it '販売価格が300円以内だと登録不可' do
         @item.price = 200
         @item.valid?

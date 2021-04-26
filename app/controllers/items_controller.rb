@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
-  before_action :move_to_index, only: :new
 
   def index
     # @items = Item.all
@@ -31,8 +30,3 @@ def item_params
   ).merge(user_id: current_user.id)
 end
 
-def move_to_index
-  unless user_signed_in?
-    redirect_to action: :new_user_session_path
-  end
-end
