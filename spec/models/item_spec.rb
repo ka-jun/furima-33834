@@ -104,6 +104,31 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping day can't be blank")
       end
+      it 'カテゴリで「−−」を選択した場合登録不可' do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
+      end
+      it '商品の状態で「−−」を選択した場合登録不可' do
+        @item.condition_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition must be other than 1")
+      end
+      it '配送料の負担で「−−」を選択した場合登録不可' do
+        @item.shipping_charge_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping charge must be other than 1")
+      end
+      it '発送元の地域で「−−」を選択した場合登録不可' do
+        @item.shipping_area_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping area must be other than 1")
+      end
+      it '発送までの日数で「−−」を選択した場合登録不可' do
+        @item.shipping_day_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping day must be other than 1")
+      end
     end
     context '販売価格が登録不可の場合' do
       it '販売価格が空白だと登録不可' do
@@ -115,7 +140,6 @@ RSpec.describe Item, type: :model do
       it '販売価格に全角数字の入力だと登録不可' do
         @item.price = '１２３４'
         @item.valid?
-        binding.pry
         expect(@item.errors.full_messages).to include('Price The number is invalid.')
       end
       it '販売価格に数字以外の文字入力だと登録不可' do
