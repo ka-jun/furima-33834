@@ -2,13 +2,11 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    # @items = Item.all
-    # @items = Item.order('created_at DESC')
+    @items = Item.order('created_at DESC')
   end
 
   def new
     @item = Item.new
-
   end
 
   def create
@@ -29,4 +27,3 @@ def item_params
     :shipping_area_id, :shipping_day_id, :price
   ).merge(user_id: current_user.id)
 end
-
