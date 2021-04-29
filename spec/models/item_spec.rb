@@ -55,7 +55,7 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid
       end
       it '販売価格が9999999円以内だと登録可' do
-        @item.price = 9999999
+        @item.price = 9_999_999
         expect(@item).to be_valid
       end
     end
@@ -107,27 +107,27 @@ RSpec.describe Item, type: :model do
       it 'カテゴリで「−−」を選択した場合登録不可' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category must be other than 1")
+        expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
       it '商品の状態で「−−」を選択した場合登録不可' do
         @item.condition_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition must be other than 1")
+        expect(@item.errors.full_messages).to include('Condition must be other than 1')
       end
       it '配送料の負担で「−−」を選択した場合登録不可' do
         @item.shipping_charge_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping charge must be other than 1")
+        expect(@item.errors.full_messages).to include('Shipping charge must be other than 1')
       end
       it '発送元の地域で「−−」を選択した場合登録不可' do
         @item.shipping_area_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping area must be other than 1")
+        expect(@item.errors.full_messages).to include('Shipping area must be other than 1')
       end
       it '発送までの日数で「−−」を選択した場合登録不可' do
         @item.shipping_day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping day must be other than 1")
+        expect(@item.errors.full_messages).to include('Shipping day must be other than 1')
       end
     end
     context '販売価格が登録不可の場合' do
@@ -150,7 +150,7 @@ RSpec.describe Item, type: :model do
       it '販売価格に数字と半角英数の混合だと登録不可' do
         @item.price = 'aaa111'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price The number is invalid.")
+        expect(@item.errors.full_messages).to include('Price The number is invalid.')
       end
       it '販売価格が300円以内だと登録不可' do
         @item.price = 200
@@ -158,7 +158,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Price The number is invalid.')
       end
       it '販売価格が9999999円以上だと登録不可' do
-        @item.price = 99999999
+        @item.price = 99_999_999
         @item.valid?
         expect(@item.errors.full_messages).to include('Price The number is invalid.')
       end

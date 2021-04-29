@@ -8,7 +8,6 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-
   end
 
   def create
@@ -29,4 +28,3 @@ def item_params
     :shipping_area_id, :shipping_day_id, :price
   ).merge(user_id: current_user.id)
 end
-
