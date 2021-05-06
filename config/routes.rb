@@ -3,6 +3,6 @@ Rails.application.routes.draw do
 
   root to: "items#index"
   resources :items
-
+  resources :purchases, only:[:create, :index, :create]
 
 end
