@@ -40,6 +40,10 @@ RSpec.describe PurchaseAddress, type: :model do
           @purchase_address.tel = '09012345678'
           expect(@purchase_address).to be_valid
         end
+        it 'トークンが生成されれば登録可' do
+          @purchase_address.token = 'tok_abcdefghijk00000000000000000'
+          expect(@purchase_address).to be_valid
+        end
       end
     describe '商品購入（異常系）' do
       context '配送先情報' do
@@ -56,7 +60,6 @@ RSpec.describe PurchaseAddress, type: :model do
         it '郵便番号の保存には(数字3桁)（ハイフン）（数字4桁）でないと登録不可' do
           @purchase_address.postal_code = '0-111111'
           @purchase_address.valid?
-          binding.pry
           expect(@purchase_address.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
         end
         it '都道府県が必須' do
@@ -83,6 +86,11 @@ RSpec.describe PurchaseAddress, type: :model do
           @purchase_address.tel = '111111111'
           @purchase_address.valid?
           expect(@purchase_address.errors.full_messages).to include("Tel Phone number Input only number")
+        end
+        it 'トークンが空の場合登録不可' do
+          @purchase_address.token = ''
+          @purchase_address.valid?
+          expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
         end
       end
     end
