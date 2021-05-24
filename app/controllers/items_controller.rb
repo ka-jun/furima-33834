@@ -5,7 +5,6 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.order('created_at DESC')
-  
   end
 
   def new
@@ -22,7 +21,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-
   end
 
   def edit
@@ -31,19 +29,18 @@ class ItemsController < ApplicationController
   def update
     if @item.update(item_params)
       redirect_to item_path
-    else 
+    else
       render :edit
     end
   end
 
   def destroy
     if @item.destroy
-    redirect_to root_path
+      redirect_to root_path
     else
       render :show
     end
   end
-
 end
 
 private
@@ -60,7 +57,5 @@ def set_item
 end
 
 def move_to_index
-  if @item.user_id != current_user.id || @item.purchase.present?
-    redirect_to root_path
-  end
+  redirect_to root_path if @item.user_id != current_user.id || @item.purchase.present?
 end
