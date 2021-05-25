@@ -35,8 +35,7 @@ class PurchasesAddressesController < ApplicationController
   end
 
   def move_to_item_index
-    if @item.purchase.present?
-      # 商品情報に紐づいている購入履歴があったら
+    if @item.purchase.present? || current_user.id == @item.user.id
       redirect_to root_path
     end
   end

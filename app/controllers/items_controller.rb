@@ -32,6 +32,7 @@ class ItemsController < ApplicationController
     else
       render :edit
     end
+  end
 
   def destroy
     if @item.destroy
@@ -40,21 +41,23 @@ class ItemsController < ApplicationController
       render :show
     end
   end
-end
 
 private
 
 def item_params
-  params.require(:item).permit(
-    :image, :name, :text, :category_id, :condition_id, :shipping_charge_id,
-    :shipping_area_id, :shipping_day_id, :price
-  ).merge(user_id: current_user.id)
-end
+    params.require(:item).permit(
+      :image, :name, :text, :category_id, :condition_id, :shipping_charge_id,
+      :shipping_area_id, :shipping_day_id, :price
+    ).merge(user_id: current_user.id)
+  end
 
-def set_item
-  @item = Item.find(params[:id])
-end
+  def set_item
+    @item = Item.find(params[:id])
+  end
 
-def move_to_index
-  redirect_to root_path if @item.user_id != current_user.id || @item.purchase.present?
+  def move_to_index
+    if @item.user_id != current_user.id || @item.purchase.present?
+      redirect_to root_path
+    end
+  end
 end
