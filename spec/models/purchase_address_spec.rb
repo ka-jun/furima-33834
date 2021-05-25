@@ -88,10 +88,31 @@ RSpec.describe PurchaseAddress, type: :model do
           @purchase_address.valid?
           expect(@purchase_address.errors.full_messages).to include('Tel Phone number Input only number')
         end
+        it '電話番号は英数混合では登録できないこと' do
+          @purchase_address.tel = '090abcdefgh'
+          @purchase_address.valid?
+          expect(@purchase_address.errors.full_messages).to include("Tel Phone number Input only number")
+        end
         it 'トークンが空の場合登録不可' do
           @purchase_address.token = ''
           @purchase_address.valid?
           expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
+        end
+        it 'user_idが空では登録できないこと' do
+          @purchase_address.user_id = ''
+          @purchase_address.valid?
+          expect(@purchase_address.errors.full_messages).to include("User can't be blank")
+        end
+        it 'item_idが空では登録できないこと' do
+          @purchase_address.item_id = ''
+          @purchase_address.valid?
+          expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
+        end
+
+        it '発送元の地域で「−−」を選択した場合登録不可' do
+          @purchase_address.shipping_area_id = '1'
+          @purchase_address.valid?
+          expect(@purchase_address.errors.full_messages).to include("Shipping area must be other than 1")
         end
       end
     end
