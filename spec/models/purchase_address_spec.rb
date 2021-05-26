@@ -28,8 +28,8 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.home_number = '1-2-3'
         expect(@purchase_address).to be_valid
       end
-      it '番地は空でも登録可' do
-        @purchase_address.home_number = ''
+      it '建物名は空でも登録可' do
+        @purchase_address.building = ''
         expect(@purchase_address).to be_valid
       end
       it '電話番号を10桁入力すると登録可' do
@@ -73,6 +73,11 @@ RSpec.describe PurchaseAddress, type: :model do
           @purchase_address.valid?
           expect(@purchase_address.errors.full_messages).to include("City can't be blank")
         end
+        it '番地が必須' do
+          @purchase_address.home_number = ''
+          @purchase_address.valid?
+          expect(@purchase_address.errors.full_messages).to include("Home number can't be blank")
+        end
         it '電話番号が必須' do
           @purchase_address.tel = ''
           @purchase_address.valid?
@@ -110,7 +115,7 @@ RSpec.describe PurchaseAddress, type: :model do
         end
 
         it '発送元の地域で「−−」を選択した場合登録不可' do
-          @purchase_address.shipping_area_id = '1'
+          @purchase_address.shipping_area_id = 1
           @purchase_address.valid?
           expect(@purchase_address.errors.full_messages).to include("Shipping area must be other than 1")
         end
